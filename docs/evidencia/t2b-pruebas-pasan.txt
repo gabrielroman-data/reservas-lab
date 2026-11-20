@@ -17,6 +17,6 @@ test_supuestos_inicio_igual_a_ahora_es_valido (tests.test_dominio.TestDominio.te
 test_inventario_json_valido (tests.test_inventario.TestInventario.test_inventario_json_valido) ... ok
 
 ----------------------------------------------------------------------
-Ran 17 tests in 0.007s
+Ran 17 tests in 0.006s
 
 OK
