@@ -1,0 +1,38 @@
+test_rf03_solicitud_valida_devuelve_datos (tests.test_dominio.TestDominio.test_rf03_solicitud_valida_devuelve_datos) ... ok
+test_rn02_unidad_desconocida (tests.test_dominio.TestDominio.test_rn02_unidad_desconocida) ... ok
+test_rn03_solicitante_espacios_alrededor_recorta (tests.test_dominio.TestDominio.test_rn03_solicitante_espacios_alrededor_recorta) ... ok
+test_rn03_solicitante_solo_espacios (tests.test_dominio.TestDominio.test_rn03_solicitante_solo_espacios) ... ok
+test_rn03_solicitante_vacio (tests.test_dominio.TestDominio.test_rn03_solicitante_vacio) ... ok
+test_rn04_fechas_invalidas (tests.test_dominio.TestDominio.test_rn04_fechas_invalidas) ... ok
+test_rn05_inicio_igual_fin (tests.test_dominio.TestDominio.test_rn05_inicio_igual_fin) ... ok
+test_rn05_inicio_posterior_fin (tests.test_dominio.TestDominio.test_rn05_inicio_posterior_fin) ... ok
+test_rn06_intervalo_contenido (tests.test_dominio.TestDominio.test_rn06_intervalo_contenido) ... ok
+test_rn06_intervalos_identicos (tests.test_dominio.TestDominio.test_rn06_intervalos_identicos) ... ok
+test_rn06_intervalos_separados (tests.test_dominio.TestDominio.test_rn06_intervalos_separados) ... ok
+test_rn06_solape_parcial (tests.test_dominio.TestDominio.test_rn06_solape_parcial) ... ok
+test_rn07_consecutivos_permitidos_orden_1 (tests.test_dominio.TestDominio.test_rn07_consecutivos_permitidos_orden_1) ... ok
+test_rn07_consecutivos_permitidos_orden_2 (tests.test_dominio.TestDominio.test_rn07_consecutivos_permitidos_orden_2) ... ok
+test_supuestos_inicio_anterior_ahora (tests.test_dominio.TestDominio.test_supuestos_inicio_anterior_ahora) ... ok
+test_supuestos_inicio_igual_a_ahora_es_valido (tests.test_dominio.TestDominio.test_supuestos_inicio_igual_a_ahora_es_valido) ... ok
+test_inventario_json_valido (tests.test_inventario.TestInventario.test_inventario_json_valido) ... ok
+tests.test_servicio (unittest.loader._FailedTest.tests.test_servicio) ... ERROR
+
+======================================================================
+ERROR: tests.test_servicio (unittest.loader._FailedTest.tests.test_servicio)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_servicio
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python314\Lib\unittest\loader.py", line 426, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python314\Lib\unittest\loader.py", line 367, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\gabri\reservas-lab\tests\test_servicio.py", line 8, in <module>
+    from reservas.servicio import ServicioReservas
+ModuleNotFoundError: No module named 'reservas.servicio'
+
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.007s
+
+FAILED (errors=1)
