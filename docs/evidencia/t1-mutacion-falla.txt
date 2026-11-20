@@ -1,0 +1,15 @@
+test_inventario_json_valido (tests.test_inventario.TestInventario.test_inventario_json_valido) ... FAIL
+
+======================================================================
+FAIL: test_inventario_json_valido (tests.test_inventario.TestInventario.test_inventario_json_valido)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\gabri\reservas-lab\tests\test_inventario.py", line 18, in test_inventario_json_valido
+    self.assertEqual(len(ids), len(set(ids)), "Los IDs del inventario deben ser únicos")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 5 != 4 : Los IDs del inventario deben ser únicos
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

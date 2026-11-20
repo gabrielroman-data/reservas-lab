@@ -1,0 +1,6 @@
+test_inventario_json_valido (tests.test_inventario.TestInventario.test_inventario_json_valido) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
