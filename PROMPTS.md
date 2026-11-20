@@ -7,13 +7,13 @@ guardá el texto exacto que uses.
 Contrato común (se fija en T2 y todas las pruebas lo usan):
 
 ```
-src/reservas/errores.py   ErrorReserva > ErrorValidacion, ErrorSolape, ErrorNoEncontrado, ErrorEstado
-src/reservas/dominio.py   Reserva (dataclass: id, unidad, solicitante, inicio, fin, estado)
+reservas/errores.py   ErrorReserva > ErrorValidacion, ErrorSolape, ErrorNoEncontrado, ErrorEstado
+reservas/dominio.py   Reserva (dataclass: id, unidad, solicitante, inicio, fin, estado)
                           se_solapan(a_ini, a_fin, b_ini, b_fin) -> bool   # a_ini < b_fin and b_ini < a_fin
                           parsear_fecha(texto) -> datetime                 # 'YYYY-MM-DDTHH:MM'
                           validar_solicitud(unidad, solicitante, inicio, fin, ahora, unidades_validas)
                               -> (solicitante_limpio, inicio_dt, fin_dt)
-src/reservas/servicio.py  ServicioReservas(ruta_db, inventario, ahora=callable)
+reservas/servicio.py  ServicioReservas(ruta_db, inventario, ahora=callable)
                           .listar_inventario() / .disponible(u, ini, fin) -> bool
                           .reservar(u, solicitante, ini, fin) -> Reserva
                           .cancelar(id) -> Reserva / .listar(estado=None) -> list[Reserva]
@@ -28,7 +28,7 @@ Reloj fijo en pruebas: `AHORA = datetime(2026, 12, 1, 8, 0)`; fechas de prueba e
 **Prompt**
 ```
 Lee AGENTS.md, README.md (sección 1) y PROGRESS.md. Tarea T1, solo esto:
-1. Crea la estructura src/reservas/ (con __init__.py y __main__.py vacío), tests/ (con __init__.py), data/.
+1. Crea la estructura reservas/ (con __init__.py y __main__.py vacío), tests/ (con __init__.py), data/.
 2. Crea data/inventario.json con exactamente estas 5 unidades: MIC-01 y MIC-02 (Microscopio digital),
    OSC-01 (Osciloscopio), MUL-01 (Multímetro), FUE-01 (Fuente de alimentación).
 3. Crea .gitignore que excluya data/reservas.db, __pycache__/ y *.pyc.
@@ -141,7 +141,7 @@ Pega la salida real de python -m unittest -v.
 
 **Prompt**
 ```
-Tarea T5. Implementa src/reservas/cli.py (argparse) y __main__.py con los subcomandos:
+Tarea T5. Implementa reservas/cli.py (argparse) y __main__.py con los subcomandos:
 init, inventario, disponibilidad U INI FIN, reservar U "SOLICITANTE" INI FIN, cancelar ID,
 listar [--estado activa|cancelada], reset-datos --confirmar.
 La CLI NO contiene reglas de negocio: solo llama a ServicioReservas. Ruta de base por defecto

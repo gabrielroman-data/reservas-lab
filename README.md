@@ -88,7 +88,7 @@ TODO: enlazar commits de la versión inicial y de cada cambio significativo, con
 
 TODO (completar con lo realmente construido):
 
-* Estructura del repositorio (`src/reservas/`, `tests/`, `data/`).
+* Estructura del repositorio (`reservas/`, `tests/`, `data/`).
 * Decisiones técnicas: Python 3.11+, solo biblioteca estándar, SQLite, CLI con `argparse`.
 * Requisitos previos y versiones (registrar salida real de `python --version`).
 * Instalación y carga inicial: comando de inicialización desde `data/inventario.json`.

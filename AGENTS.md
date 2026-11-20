@@ -8,7 +8,7 @@ La fuente de verdad de los requisitos es la sección "Especificación" de `READM
 2. Trabaja en pasos pequeños: un requisito (RF-xx / RN-xx) por vez, con su prueba.
 3. Escribe primero la prueba y confirma que falla; luego implementa.
 4. Solo biblioteca estándar de Python 3.11+ (sin dependencias externas). Pruebas con `unittest`.
-5. Toda regla de negocio vive en `src/reservas/dominio.py`; la CLI y el almacenamiento no la duplican.
+5. Toda regla de negocio vive en `reservas/dominio.py`; la CLI y el almacenamiento no la duplican.
 6. La disponibilidad y la creación de reservas usan la MISMA función de solape.
 7. Hora actual inyectable (parámetro `ahora`), nunca `datetime.now()` dentro de las reglas.
 8. Al terminar cada tarea: ejecuta `python -m unittest -v`, pega el resultado real en `PROGRESS.md` y haz commit.
