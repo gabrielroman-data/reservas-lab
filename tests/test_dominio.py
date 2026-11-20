@@ -50,6 +50,18 @@ class TestDominio(unittest.TestCase):
         self.assertFalse(se_solapan(a_ini, a_fin, b_ini, b_fin))
 
     # --- validar_solicitud / parsear_fecha ---
+    def test_rf03_solicitud_valida_devuelve_datos(self):
+        sol, ini, fin = validar_solicitud("MIC-01", "  Ana Prueba  ", "2026-12-01T10:00", "2026-12-01T11:00", AHORA, UNIDADES_VALIDAS)
+        self.assertEqual(sol, "Ana Prueba")
+        self.assertEqual(ini, datetime(2026, 12, 1, 10, 0))
+        self.assertEqual(fin, datetime(2026, 12, 1, 11, 0))
+
+    def test_supuestos_inicio_igual_a_ahora_es_valido(self):
+        sol, ini, fin = validar_solicitud("MIC-01", "Ana Prueba", "2026-12-01T08:00", "2026-12-01T09:00", AHORA, UNIDADES_VALIDAS)
+        self.assertEqual(sol, "Ana Prueba")
+        self.assertEqual(ini, AHORA)
+        self.assertEqual(fin, datetime(2026, 12, 1, 9, 0))
+
     def test_rn02_unidad_desconocida(self):
         with self.assertRaises(ErrorValidacion):
             validar_solicitud("XXX-99", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T11:00", AHORA, UNIDADES_VALIDAS)
