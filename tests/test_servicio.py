@@ -101,6 +101,10 @@ class TestServicio(unittest.TestCase):
     def test_rf03_reservar_invalido_sin_filas(self):
         with self.assertRaises(ErrorValidacion):
             self.servicio.reservar("XXX-99", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T11:00")
+        with self.assertRaises(ErrorValidacion):
+            self.servicio.reservar("MIC-01", "   ", "2026-12-01T10:00", "2026-12-01T11:00")
+        with self.assertRaises(ErrorValidacion):
+            self.servicio.reservar("MIC-01", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T10:00")
         self.assertEqual(len(self.servicio.listar()), 0)
 
     def test_ca07_persistencia_y_recuperacion_tras_reinicio(self):
@@ -118,8 +122,17 @@ class TestServicio(unittest.TestCase):
             self.assertEqual(len(reservas), 2)
             self.assertEqual(reservas[0].id, 1)
             self.assertEqual(reservas[0].unidad, "MIC-01")
+            self.assertEqual(reservas[0].solicitante, "Ana Prueba")
+            self.assertEqual(reservas[0].inicio, datetime(2026, 12, 1, 10, 0))
+            self.assertEqual(reservas[0].fin, datetime(2026, 12, 1, 11, 0))
+            self.assertEqual(reservas[0].estado, "activa")
+
             self.assertEqual(reservas[1].id, 2)
             self.assertEqual(reservas[1].unidad, "MIC-02")
+            self.assertEqual(reservas[1].solicitante, "Juan Pedro")
+            self.assertEqual(reservas[1].inicio, datetime(2026, 12, 1, 12, 0))
+            self.assertEqual(reservas[1].fin, datetime(2026, 12, 1, 13, 0))
+            self.assertEqual(reservas[1].estado, "activa")
         finally:
             nuevo_servicio.cerrar()
 
