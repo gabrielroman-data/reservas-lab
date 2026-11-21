@@ -27,6 +27,24 @@ class AlmacenSQLite:
     def obtener_conexion(self):
         return self._conexion
 
+    def obtener_por_id(self, reserva_id: int) -> Reserva | None:
+        cursor = self._conexion.cursor()
+        cursor.execute(
+            "SELECT id, unidad, solicitante, inicio, fin, estado FROM reservas WHERE id = ?",
+            (reserva_id,)
+        )
+        fila = cursor.fetchone()
+        if not fila:
+            return None
+        return Reserva(
+            id=fila["id"],
+            unidad=fila["unidad"],
+            solicitante=fila["solicitante"],
+            inicio=datetime.strptime(fila["inicio"], "%Y-%m-%dT%H:%M"),
+            fin=datetime.strptime(fila["fin"], "%Y-%m-%dT%H:%M"),
+            estado=fila["estado"]
+        )
+
     def obtener_activas_por_unidad(self, unidad: str) -> list[tuple[int, datetime, datetime]]:
         cursor = self._conexion.cursor()
         cursor.execute(
@@ -63,6 +81,15 @@ class AlmacenSQLite:
             fin=fin,
             estado="activa"
         )
+
+    def actualizar_estado(self, reserva_id: int, nuevo_estado: str) -> Reserva | None:
+        cursor = self._conexion.cursor()
+        with self._conexion:
+            cursor.execute(
+                "UPDATE reservas SET estado = ? WHERE id = ?",
+                (nuevo_estado, reserva_id)
+            )
+        return self.obtener_por_id(reserva_id)
 
     def listar(self, estado: str | None = None) -> list[Reserva]:
         cursor = self._conexion.cursor()

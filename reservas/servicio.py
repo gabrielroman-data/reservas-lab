@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Callable, List, Dict, Any
 
 from reservas.dominio import se_solapan, validar_intervalo, validar_solicitud, Reserva
-from reservas.errores import ErrorSolape
+from reservas.errores import ErrorEstado, ErrorNoEncontrado, ErrorSolape
 from reservas.persistencia import AlmacenSQLite
 
 class ServicioReservas:
@@ -43,6 +43,19 @@ class ServicioReservas:
             raise ErrorSolape(f"La unidad '{unidad}' ya se encuentra reservada en el intervalo especificado.")
 
         return self.almacen.insertar_reserva(unidad, solicitante_limpio, inicio_dt, fin_dt)
+
+    def cancelar(self, reserva_id: int) -> Reserva:
+        reserva = self.almacen.obtener_por_id(reserva_id)
+        if not reserva:
+            raise ErrorNoEncontrado(f"No existe ninguna reserva con el ID {reserva_id}.")
+        
+        if reserva.estado == "cancelada":
+            raise ErrorEstado(f"La reserva con ID {reserva_id} ya se encuentra cancelada.")
+
+        reserva_actualizada = self.almacen.actualizar_estado(reserva_id, "cancelada")
+        if not reserva_actualizada:
+            raise ErrorNoEncontrado(f"No existe ninguna reserva con el ID {reserva_id}.")
+        return reserva_actualizada
 
     def listar(self, estado: str | None = None) -> List[Reserva]:
         return self.almacen.listar(estado)

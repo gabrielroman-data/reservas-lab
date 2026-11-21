@@ -1,0 +1,42 @@
+test_rf03_solicitud_valida_devuelve_datos (tests.test_dominio.TestDominio.test_rf03_solicitud_valida_devuelve_datos) ... ok
+test_rn02_unidad_desconocida (tests.test_dominio.TestDominio.test_rn02_unidad_desconocida) ... ok
+test_rn03_solicitante_espacios_alrededor_recorta (tests.test_dominio.TestDominio.test_rn03_solicitante_espacios_alrededor_recorta) ... ok
+test_rn03_solicitante_solo_espacios (tests.test_dominio.TestDominio.test_rn03_solicitante_solo_espacios) ... ok
+test_rn03_solicitante_vacio (tests.test_dominio.TestDominio.test_rn03_solicitante_vacio) ... ok
+test_rn04_fechas_invalidas (tests.test_dominio.TestDominio.test_rn04_fechas_invalidas) ... ok
+test_rn05_inicio_igual_fin (tests.test_dominio.TestDominio.test_rn05_inicio_igual_fin) ... ok
+test_rn05_inicio_posterior_fin (tests.test_dominio.TestDominio.test_rn05_inicio_posterior_fin) ... ok
+test_rn06_intervalo_contenido (tests.test_dominio.TestDominio.test_rn06_intervalo_contenido) ... ok
+test_rn06_intervalos_identicos (tests.test_dominio.TestDominio.test_rn06_intervalos_identicos) ... ok
+test_rn06_intervalos_separados (tests.test_dominio.TestDominio.test_rn06_intervalos_separados) ... ok
+test_rn06_solape_parcial (tests.test_dominio.TestDominio.test_rn06_solape_parcial) ... ok
+test_rn07_consecutivos_permitidos_orden_1 (tests.test_dominio.TestDominio.test_rn07_consecutivos_permitidos_orden_1) ... ok
+test_rn07_consecutivos_permitidos_orden_2 (tests.test_dominio.TestDominio.test_rn07_consecutivos_permitidos_orden_2) ... ok
+test_supuestos_inicio_anterior_ahora (tests.test_dominio.TestDominio.test_supuestos_inicio_anterior_ahora) ... ok
+test_supuestos_inicio_igual_a_ahora_es_valido (tests.test_dominio.TestDominio.test_supuestos_inicio_igual_a_ahora_es_valido) ... ok
+test_inventario_json_valido (tests.test_inventario.TestInventario.test_inventario_json_valido) ... ok
+test_ca01_crear_reserva_mic01_exitosa (tests.test_servicio.TestServicio.test_ca01_crear_reserva_mic01_exitosa) ... ok
+test_ca02_solape_rechazado_y_sin_filas (tests.test_servicio.TestServicio.test_ca02_solape_rechazado_y_sin_filas) ... ok
+test_ca03_consecutivos_ambas_activas (tests.test_servicio.TestServicio.test_ca03_consecutivos_ambas_activas) ... ok
+test_ca04_distintas_unidades_mismo_horario (tests.test_servicio.TestServicio.test_ca04_distintas_unidades_mismo_horario) ... ok
+test_ca06_cancelar_libera_intervalo_para_disponible_y_reservar (tests.test_servicio.TestServicio.test_ca06_cancelar_libera_intervalo_para_disponible_y_reservar) ... ok
+test_ca07_persistencia_y_recuperacion_tras_reinicio (tests.test_servicio.TestServicio.test_ca07_persistencia_y_recuperacion_tras_reinicio) ... ok
+test_ca08_consistencia_disponible_y_reservar (tests.test_servicio.TestServicio.test_ca08_consistencia_disponible_y_reservar) ... ok
+test_rf01_listar_inventario_devuelve_5_unidades (tests.test_servicio.TestServicio.test_rf01_listar_inventario_devuelve_5_unidades) ... ok
+test_rf02_disponible_respuestas_correctas (tests.test_servicio.TestServicio.test_rf02_disponible_respuestas_correctas) ... ok
+test_rf03_reservar_invalido_sin_filas (tests.test_servicio.TestServicio.test_rf03_reservar_invalido_sin_filas) ... ok
+test_rf03_segunda_reserva_id_creciente (tests.test_servicio.TestServicio.test_rf03_segunda_reserva_id_creciente) ... ok
+test_rf04_cancelar_reserva_activa_devuelve_estado_cancelada (tests.test_servicio.TestServicio.test_rf04_cancelar_reserva_activa_devuelve_estado_cancelada) ... ok
+test_rf05_listar_despues_de_cancelar_y_filtrar (tests.test_servicio.TestServicio.test_rf05_listar_despues_de_cancelar_y_filtrar) ... ok
+test_rf06_autoincrement_mantiene_contador_tras_reinicio (tests.test_servicio.TestServicio.test_rf06_autoincrement_mantiene_contador_tras_reinicio) ... ok
+test_rf06_persistencia_cancelada_tras_reinicio_y_no_bloquea (tests.test_servicio.TestServicio.test_rf06_persistencia_cancelada_tras_reinicio_y_no_bloquea) ... ok
+test_rn01_cancelar_una_deja_la_otra_activa (tests.test_servicio.TestServicio.test_rn01_cancelar_una_deja_la_otra_activa) ... ok
+test_rn06_misma_unidad_mismo_horario_distinto_solicitante (tests.test_servicio.TestServicio.test_rn06_misma_unidad_mismo_horario_distinto_solicitante) ... ok
+test_rn09_disponible_valida_entradas (tests.test_servicio.TestServicio.test_rn09_disponible_valida_entradas) ... ok
+test_rn10_cancelar_dos_veces_lanza_error_estado_y_no_altera (tests.test_servicio.TestServicio.test_rn10_cancelar_dos_veces_lanza_error_estado_y_no_altera) ... ok
+test_rn10_cancelar_id_inexistente_lanza_error (tests.test_servicio.TestServicio.test_rn10_cancelar_id_inexistente_lanza_error) ... ok
+
+----------------------------------------------------------------------
+Ran 37 tests in 0.187s
+
+OK

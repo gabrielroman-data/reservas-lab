@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from reservas.errores import ErrorSolape, ErrorValidacion
+from reservas.errores import ErrorNoEncontrado, ErrorEstado, ErrorSolape, ErrorValidacion
 from reservas.servicio import ServicioReservas
 
 AHORA = datetime(2026, 12, 1, 8, 0)
@@ -158,6 +158,84 @@ class TestServicio(unittest.TestCase):
         ids = [item["id"] for item in inv]
         self.assertIn("MIC-01", ids)
         self.assertIn("FUE-01", ids)
+
+    # --- Pruebas de la Tarea T4 ---
+    def test_rf04_cancelar_reserva_activa_devuelve_estado_cancelada(self):
+        r1 = self.servicio.reservar("MIC-01", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T11:00")
+        rc = self.servicio.cancelar(r1.id)
+        self.assertEqual(rc.id, r1.id)
+        self.assertEqual(rc.unidad, "MIC-01")
+        self.assertEqual(rc.solicitante, "Ana Prueba")
+        self.assertEqual(rc.inicio, datetime(2026, 12, 1, 10, 0))
+        self.assertEqual(rc.fin, datetime(2026, 12, 1, 11, 0))
+        self.assertEqual(rc.estado, "cancelada")
+
+    def test_rf05_listar_despues_de_cancelar_y_filtrar(self):
+        r1 = self.servicio.reservar("MIC-01", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T11:00")
+        r2 = self.servicio.reservar("MIC-02", "Pedro Solo", "2026-12-01T12:00", "2026-12-01T13:00")
+        self.servicio.cancelar(r1.id)
+
+        todas = self.servicio.listar()
+        self.assertEqual(len(todas), 2)
+
+        activas = self.servicio.listar(estado="activa")
+        self.assertEqual(len(activas), 1)
+        self.assertEqual(activas[0].id, r2.id)
+
+        canceladas = self.servicio.listar(estado="cancelada")
+        self.assertEqual(len(canceladas), 1)
+        self.assertEqual(canceladas[0].id, r1.id)
+
+    def test_ca06_cancelar_libera_intervalo_para_disponible_y_reservar(self):
+        r1 = self.servicio.reservar("MIC-01", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T11:00")
+        self.servicio.cancelar(r1.id)
+
+        self.assertTrue(self.servicio.disponible("MIC-01", "2026-12-01T10:00", "2026-12-01T11:00"))
+        r2 = self.servicio.reservar("MIC-01", "Pedro Nuevo", "2026-12-01T10:30", "2026-12-01T11:30")
+        self.assertEqual(r2.estado, "activa")
+
+    def test_rn10_cancelar_id_inexistente_lanza_error(self):
+        with self.assertRaises(ErrorNoEncontrado):
+            self.servicio.cancelar(999)
+
+    def test_rn10_cancelar_dos_veces_lanza_error_estado_y_no_altera(self):
+        r1 = self.servicio.reservar("MIC-01", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T11:00")
+        self.servicio.cancelar(r1.id)
+
+        with self.assertRaises(ErrorEstado):
+            self.servicio.cancelar(r1.id)
+
+        todas = self.servicio.listar()
+        self.assertEqual(len(todas), 1)
+        self.assertEqual(todas[0].estado, "cancelada")
+
+    def test_rf06_persistencia_cancelada_tras_reinicio_y_no_bloquea(self):
+        r1 = self.servicio.reservar("MIC-01", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T11:00")
+        self.servicio.cancelar(r1.id)
+        self.servicio.cerrar()
+
+        nuevo_servicio = ServicioReservas(
+            ruta_db=str(self.db_path),
+            inventario=self.inventario,
+            ahora=lambda: AHORA
+        )
+        try:
+            reservas = nuevo_servicio.listar()
+            self.assertEqual(len(reservas), 1)
+            self.assertEqual(reservas[0].estado, "cancelada")
+
+            self.assertTrue(nuevo_servicio.disponible("MIC-01", "2026-12-01T10:00", "2026-12-01T11:00"))
+        finally:
+            nuevo_servicio.cerrar()
+
+    def test_rn01_cancelar_una_deja_la_otra_activa(self):
+        r1 = self.servicio.reservar("MIC-01", "Ana Prueba", "2026-12-01T10:00", "2026-12-01T11:00")
+        r2 = self.servicio.reservar("MIC-02", "Pedro Solo", "2026-12-01T10:00", "2026-12-01T11:00")
+        self.servicio.cancelar(r1.id)
+
+        activas = self.servicio.listar(estado="activa")
+        self.assertEqual(len(activas), 1)
+        self.assertEqual(activas[0].id, r2.id)
 
 if __name__ == "__main__":
     unittest.main()
