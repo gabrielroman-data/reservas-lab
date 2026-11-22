@@ -91,6 +91,10 @@ class AlmacenSQLite:
             )
         return self.obtener_por_id(reserva_id)
 
+    def reiniciar_datos(self):
+        with self._conexion:
+            self._conexion.execute("DELETE FROM reservas")
+
     def listar(self, estado: str | None = None) -> list[Reserva]:
         cursor = self._conexion.cursor()
         if estado:

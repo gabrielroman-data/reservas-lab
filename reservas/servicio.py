@@ -57,6 +57,9 @@ class ServicioReservas:
             raise ErrorNoEncontrado(f"No existe ninguna reserva con el ID {reserva_id}.")
         return reserva_actualizada
 
+    def reiniciar_datos(self):
+        self.almacen.reiniciar_datos()
+
     def listar(self, estado: str | None = None) -> List[Reserva]:
         return self.almacen.listar(estado)
 
