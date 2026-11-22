@@ -158,7 +158,7 @@ En `data/reservas.db` (SQLite), o en la ruta indicada con `--db`. El archivo no 
 | Mutación T3, T4 y T5 | no ejecutada | no ejecutada | no ejecutada |
 | Pruebas finales | `python -m unittest -v` | 48 pruebas, OK | yo |
 | Persistencia tras reiniciar | `docs/persistencia.md` | esperado y observado coinciden | yo |
-| Clon limpio en otra carpeta | `git clone`, pruebas y consola | no ejecutado | no ejecutado |
+| Clon limpio en otra carpeta | `git clone`, pruebas y consola | 48 pruebas, OK y consola operativa en un clon nuevo | yo |
 
 ### Pendientes y limitaciones
 - Un solo proceso a la vez: no hay control de concurrencia entre procesos ni equipos (fuera de alcance).
