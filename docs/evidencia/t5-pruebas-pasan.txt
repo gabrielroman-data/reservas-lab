@@ -48,6 +48,6 @@ test_rn10_cancelar_dos_veces_lanza_error_estado_y_no_altera (tests.test_servicio
 test_rn10_cancelar_id_inexistente_lanza_error (tests.test_servicio.TestServicio.test_rn10_cancelar_id_inexistente_lanza_error) ... ok
 
 ----------------------------------------------------------------------
-Ran 48 tests in 0.949s
+Ran 48 tests in 0.931s
 
 OK
