@@ -14,5 +14,5 @@ Registrar solo resultados realmente ejecutados.
 ## Bitácora
 | Fecha | Tarea | Comando ejecutado | Resultado real | Decisión humana |
 |---|---|---|---|---|
-| 2025-05-18 | T1 | `python -m unittest -v` | Ran 1 test in 0.000s - OK | Creación del esqueleto, inventario.json, .gitignore y test de inventario |
+| 2026-11-19 | T1 | `python -m unittest -v` | Ran 1 test in 0.000s - OK | Creación del esqueleto, inventario.json, .gitignore y test de inventario |
 | 2026-11-20 | T2 | `python -m unittest -v` | Ran 17 tests in 0.008s - OK | Implementación de dominio.py y errores.py con validaciones y solape estricto |
